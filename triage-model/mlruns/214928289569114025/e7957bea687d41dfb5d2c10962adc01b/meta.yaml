@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/214928289569114025/e7957bea687d41dfb5d2c10962adc01b/artifacts
+end_time: 1748853306082
+entry_point_name: ''
+experiment_id: '214928289569114025'
+lifecycle_stage: active
+run_id: e7957bea687d41dfb5d2c10962adc01b
+run_name: dapper-gnu-405
+run_uuid: e7957bea687d41dfb5d2c10962adc01b
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1748853273943
+status: 3
+tags: []
+user_id: MMNAD1

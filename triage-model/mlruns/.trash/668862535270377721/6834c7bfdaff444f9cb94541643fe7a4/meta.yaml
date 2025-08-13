@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/668862535270377721/6834c7bfdaff444f9cb94541643fe7a4/artifacts
+deleted_time: 1748767760211
+end_time: 1748685598944
+entry_point_name: ''
+experiment_id: '668862535270377721'
+lifecycle_stage: deleted
+run_id: 6834c7bfdaff444f9cb94541643fe7a4
+run_name: sassy-moth-290
+run_uuid: 6834c7bfdaff444f9cb94541643fe7a4
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1748685564376
+status: 3
+tags: []
+user_id: MMNAD1

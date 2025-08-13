@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/668862535270377721/24e2342d6131433082fda465effd9000/artifacts
+deleted_time: 1748767760211
+end_time: 1748685633285
+entry_point_name: ''
+experiment_id: '668862535270377721'
+lifecycle_stage: deleted
+run_id: 24e2342d6131433082fda465effd9000
+run_name: awesome-shrimp-62
+run_uuid: 24e2342d6131433082fda465effd9000
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1748685599141
+status: 3
+tags: []
+user_id: MMNAD1

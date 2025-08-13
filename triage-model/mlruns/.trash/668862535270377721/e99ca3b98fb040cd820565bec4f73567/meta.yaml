@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/668862535270377721/e99ca3b98fb040cd820565bec4f73567/artifacts
+deleted_time: 1748767760211
+end_time: 1748685667518
+entry_point_name: ''
+experiment_id: '668862535270377721'
+lifecycle_stage: deleted
+run_id: e99ca3b98fb040cd820565bec4f73567
+run_name: blushing-crow-373
+run_uuid: e99ca3b98fb040cd820565bec4f73567
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1748685633479
+status: 3
+tags: []
+user_id: MMNAD1

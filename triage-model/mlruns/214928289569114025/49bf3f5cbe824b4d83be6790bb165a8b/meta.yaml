@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/214928289569114025/49bf3f5cbe824b4d83be6790bb165a8b/artifacts
+end_time: 1748853460002
+entry_point_name: ''
+experiment_id: '214928289569114025'
+lifecycle_stage: active
+run_id: 49bf3f5cbe824b4d83be6790bb165a8b
+run_name: amazing-jay-965
+run_uuid: 49bf3f5cbe824b4d83be6790bb165a8b
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1748853048063
+status: 3
+tags: []
+user_id: MMNAD1

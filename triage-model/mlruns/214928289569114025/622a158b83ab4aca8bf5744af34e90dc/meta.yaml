@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/214928289569114025/622a158b83ab4aca8bf5744af34e90dc/artifacts
+end_time: 1748853240521
+entry_point_name: ''
+experiment_id: '214928289569114025'
+lifecycle_stage: active
+run_id: 622a158b83ab4aca8bf5744af34e90dc
+run_name: delicate-hog-759
+run_uuid: 622a158b83ab4aca8bf5744af34e90dc
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1748853207113
+status: 3
+tags: []
+user_id: MMNAD1

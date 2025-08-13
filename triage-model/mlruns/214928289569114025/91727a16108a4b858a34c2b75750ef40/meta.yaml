@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/214928289569114025/91727a16108a4b858a34c2b75750ef40/artifacts
+end_time: 1748853401203
+entry_point_name: ''
+experiment_id: '214928289569114025'
+lifecycle_stage: active
+run_id: 91727a16108a4b858a34c2b75750ef40
+run_name: puzzled-bee-514
+run_uuid: 91727a16108a4b858a34c2b75750ef40
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1748853368868
+status: 3
+tags: []
+user_id: MMNAD1

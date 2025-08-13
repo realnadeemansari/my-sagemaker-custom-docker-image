@@ -1,0 +1,132 @@
+#!/usr/bin python3
+# A sample training component that trains a simple scikit-learn decision tree model.
+# This implementation works in File mode and makes no assumptions about the input file names.
+# Input is specified as CSV with a data point in each row and the labels in the first column.
+
+from __future__ import print_function
+
+import json
+import os
+import pickle
+import sys
+from time import time
+from tokenize import String
+import traceback
+from io import StringIO
+
+import pandas as pd
+from prophet import Prophet
+from datetime import datetime
+import boto3
+
+# These are the paths to where SageMaker mounts interesting things in your container.
+
+prefix = '/opt/ml/'
+
+input_path = prefix + 'input/data'
+output_path = os.path.join(prefix, 'output')
+model_path = os.path.join(prefix, 'model')
+param_path = os.path.join(prefix, 'input/config/hyperparameters.json')
+bucket = 'edl-allianzvbr-prod'
+bucket_prefix = 'prophet-model'
+# This algorithm has a single channel of input data called 'training'. Since we run in
+# File mode, the input files are copied to the directory specified here.
+channel_name='training'
+training_path = os.path.join(input_path, channel_name)
+s3_client = boto3.client('s3')
+
+# Data transformation function
+def data_transformation(df):
+    
+    df = df[["payment_date", "invoice_fee"]]
+    df.dropna(inplace = True)
+    df.reset_index(drop = True, inplace = True)
+    
+    #Converting column into date type
+    try:
+        df["payment_date"] = pd.to_datetime(df['payment_date'].astype(str), format='%d-%m-%Y')
+    except:
+        df["payment_date"] = pd.to_datetime(df['payment_date'].astype(str), format='%Y-%m-%d')
+        
+    #Stating training data to be used from 1st January 2020 as per data analysis performed on actual data
+    df2 = df[df["payment_date"]>'2020-01-01'].sort_values(by="payment_date")
+    df2.reset_index(drop = True, inplace = True)
+    df2.set_index("payment_date", inplace = True)
+    
+    #summing the data on weekly basis
+    df3 = df2.groupby(pd.Grouper(freq='W')).sum()
+    df3.reset_index(inplace = True)
+    
+    time_max = max(df3["payment_date"])
+    year = str(time_max.year if time_max.month <= 3 else time_max.year + 1)
+    period = (datetime.strptime(year + "-03-31", "%Y-%m-%d") - time_max).days//7
+    df3.set_index("payment_date", inplace = True)
+    
+    # Time Series Data
+    final_df = pd.DataFrame({'ds':df3.index,'y':df3.invoice_fee})
+    return final_df, period
+
+# The function to execute the training.
+def train():
+    print("Starting the training.")
+    try:
+        with open(param_path, 'r') as tc:
+            trainingParams = json.load(tc)
+
+        # Take the set of files and read them all into a single pandas dataframe
+        input_files = [ os.path.join(training_path, file) for file in os.listdir(training_path) ]
+        if len(input_files) == 0:
+            raise ValueError(('There are no files in {}.\n' +
+                              'This usually indicates that the channel ({}) was incorrectly specified,\n' +
+                              'the data specification in S3 was incorrectly specified or the role specified\n' +
+                              'does not have permission to access the data.').format(training_path, channel_name))
+        raw_data = [ pd.read_csv(file) for file in input_files if file.endswith(".csv")]
+        train_data = pd.concat(raw_data)
+        final_df, period = data_transformation(train_data)
+        # instantiate the model and fit the timeseries
+        prophet = Prophet()
+        prophet.fit(final_df)
+        
+        #create future dataframe
+        future = prophet.make_future_dataframe(periods=period, freq='W', include_history=False)
+        forecast = prophet.predict(future)
+        forecast = forecast[['ds','yhat','yhat_lower','yhat_upper']]
+        
+        #Grouping of values on monthly basis
+        forecast.set_index('ds', inplace = True)
+        forecast2 = forecast.groupby(pd.Grouper(freq="M")).sum()
+        forecast2.reset_index(inplace = True)
+        
+        forecast2 = forecast2[['ds', 'yhat']]
+        forecast2.rename(columns = {'ds':'forecast_date', 'yhat': 'Amount'}, inplace = True)
+        forecast2["Source"] = "Forecast"
+        forecast2["Region"] = train_data["country_code"][0]
+        forecast2["Load_date"] = datetime.strftime(datetime.now(), "%Y-%m-%d")
+        
+        # Save the forecast
+        csv_buffer = StringIO()
+        forecast2.to_csv(csv_buffer, index = False)
+        s3_client.put_object(Body=csv_buffer.getvalue(), 
+                            Bucket=bucket, 
+                            Key=bucket_prefix + "/output/forecasts/" + train_data["country_code"][0] + "/forecast-" + datetime.strftime(datetime.now(), "%Y-%m-%d-%H-%M-%S") + ".csv")
+
+        # Save the model
+        with open(os.path.join(model_path, "prophet-model.pkl"), "wb") as out:
+            pickle.dump(prophet, out)
+        print("Training complete.")
+    except Exception as e:
+        # Write out an error file. This will be returned as the failureReason in the
+        # DescribeTrainingJob result.
+        trc = traceback.format_exc()
+        with open(os.path.join(output_path, 'failure'), 'w') as s:
+            s.write('Exception during training: ' + str(e) + '\n' + trc)
+        # Printing this causes the exception to be in the training job logs, as well.
+        print('Exception during training: ' + str(e) + '\n' + trc, file=sys.stderr)
+        # A non-zero exit code causes the training job to be marked as Failed.
+        sys.exit(255)
+
+if __name__ == '__main__':
+    train()
+
+    # A zero exit code causes the job to be marked a Succeeded.
+    sys.exit(0)

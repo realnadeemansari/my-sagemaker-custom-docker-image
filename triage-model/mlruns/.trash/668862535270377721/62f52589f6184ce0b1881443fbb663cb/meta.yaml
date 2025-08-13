@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/668862535270377721/62f52589f6184ce0b1881443fbb663cb/artifacts
+deleted_time: 1748767760211
+end_time: 1748685738619
+entry_point_name: ''
+experiment_id: '668862535270377721'
+lifecycle_stage: deleted
+run_id: 62f52589f6184ce0b1881443fbb663cb
+run_name: legendary-vole-440
+run_uuid: 62f52589f6184ce0b1881443fbb663cb
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1748685704073
+status: 3
+tags: []
+user_id: MMNAD1

@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/668862535270377721/e01f5fcc0c454237bde5fd796fb24f8a/artifacts
+deleted_time: 1748767760211
+end_time: 1748685772666
+entry_point_name: ''
+experiment_id: '668862535270377721'
+lifecycle_stage: deleted
+run_id: e01f5fcc0c454237bde5fd796fb24f8a
+run_name: adventurous-seal-398
+run_uuid: e01f5fcc0c454237bde5fd796fb24f8a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1748685738773
+status: 3
+tags: []
+user_id: MMNAD1
