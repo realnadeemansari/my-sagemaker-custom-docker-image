@@ -1,0 +1,7 @@
+aliases:
+  dev: '1'
+  test: '2'
+creation_timestamp: 1748687474438
+description: This is my first wine quality model to mlflow
+last_updated_timestamp: 1748767747819
+name: Wine-Quality

@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/214928289569114025/0a606f4b1e834149b97d7a10c9d12e76/artifacts
+end_time: 1748853206910
+entry_point_name: ''
+experiment_id: '214928289569114025'
+lifecycle_stage: active
+run_id: 0a606f4b1e834149b97d7a10c9d12e76
+run_name: righteous-jay-436
+run_uuid: 0a606f4b1e834149b97d7a10c9d12e76
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1748853048670
+status: 3
+tags: []
+user_id: MMNAD1

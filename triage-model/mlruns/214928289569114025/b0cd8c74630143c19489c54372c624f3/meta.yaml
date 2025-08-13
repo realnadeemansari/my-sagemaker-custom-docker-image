@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/214928289569114025/b0cd8c74630143c19489c54372c624f3/artifacts
+end_time: 1748853335223
+entry_point_name: ''
+experiment_id: '214928289569114025'
+lifecycle_stage: active
+run_id: b0cd8c74630143c19489c54372c624f3
+run_name: mercurial-grouse-71
+run_uuid: b0cd8c74630143c19489c54372c624f3
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1748853306248
+status: 3
+tags: []
+user_id: MMNAD1

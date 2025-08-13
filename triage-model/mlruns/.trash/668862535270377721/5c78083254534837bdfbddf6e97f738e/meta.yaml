@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/668862535270377721/5c78083254534837bdfbddf6e97f738e/artifacts
+deleted_time: 1748767760211
+end_time: 1748685703889
+entry_point_name: ''
+experiment_id: '668862535270377721'
+lifecycle_stage: deleted
+run_id: 5c78083254534837bdfbddf6e97f738e
+run_name: aged-mink-573
+run_uuid: 5c78083254534837bdfbddf6e97f738e
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1748685667700
+status: 3
+tags: []
+user_id: MMNAD1
